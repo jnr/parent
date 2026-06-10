@@ -22,9 +22,6 @@
 [submodule "jnr-process"]
 	path = jnr-process
 	url = git@github.com:jnr/jnr-process.git
-[submodule "jnr-ffi-examples"]
-	path = jnr-ffi-examples
-	url = git@github.com:jnr/jnr-ffi-examples.git
 [submodule "jnr-x86asm"]
 	path = jnr-x86asm
 	url = git@github.com:jnr/jnr-x86asm.git
