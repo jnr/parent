@@ -44,7 +44,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <jnr.test.toolchain>8</jnr.test.toolchain>
+    <jnr.test.toolchain>${java.specification.version}</jnr.test.toolchain>
   </properties>
 
   <modules>
@@ -64,53 +64,28 @@
     <profile>
       <id>release</id>
       <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <artifactId>maven-gpg-plugin</artifactId>
-              <version>3.2.8</version>
-              <executions>
-                <execution>
-                  <id>sign-artifacts</id>
-                  <phase>verify</phase>
-                  <goals>
-                    <goal>sign</goal>
-                  </goals>
-                </execution>
-              </executions>
-              <configuration>
-                <gpgArguments>
-                  <gpgArgument>--pinentry-mode</gpgArgument>
-                  <gpgArgument>loopback</gpgArgument>
-                </gpgArguments>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
-    <profile>
-      <id>java9</id>
-      <build>
         <plugins>
           <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M5</version>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.2.8</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
             <configuration>
-              <!-- open up modules so we can access JDK internals during testing -->
-              <environmentVariables>
-                <JDK_JAVA_OPTIONS>--add-modules java.scripting --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</JDK_JAVA_OPTIONS>
-              </environmentVariables>
+              <gpgArguments>
+                <gpgArgument>--pinentry-mode</gpgArgument>
+                <gpgArgument>loopback</gpgArgument>
+              </gpgArguments>
             </configuration>
           </plugin>
         </plugins>
       </build>
-      <activation>
-        <jdk>[9,)</jdk>
-      </activation>
-      <properties>
-        <maven.compiler.release>8</maven.compiler.release>
-      </properties>
     </profile>
   </profiles>
 
@@ -137,6 +112,10 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.6</version>
           <configuration>
+            <!-- open up modules so we can access JDK internals during testing -->
+            <environmentVariables>
+              <JDK_JAVA_OPTIONS>--add-modules java.scripting --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</JDK_JAVA_OPTIONS>
+            </environmentVariables>
             <jdkToolchain>
               <version>${jnr.test.toolchain}</version>
             </jdkToolchain>
@@ -176,9 +155,27 @@
 
     <plugins>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>org.sonatype.central</groupId>
         <artifactId>central-publishing-maven-plugin</artifactId>
-        <version>0.7.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
