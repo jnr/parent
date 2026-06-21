@@ -48,19 +48,6 @@
     <jnr.test.toolchain>${java.specification.version}</jnr.test.toolchain>
   </properties>
 
-  <modules>
-    <module>jffi</module>
-    <module>jnr-ffi</module>
-    <module>jnr-posix</module>
-    <module>jnr-enxio</module>
-    <module>jnr-unixsocket</module>
-    <module>jnr-constants</module>
-    <module>jnr-netdb</module>
-    <module>jnr-process</module>
-    <module>jnr-x86asm</module>
-    <module>jnr-a64asm</module>
-  </modules>
-
   <profiles>
     <profile>
       <id>release</id>
