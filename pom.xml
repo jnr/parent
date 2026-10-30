@@ -4,7 +4,7 @@
 
   <groupId>com.github.jnr</groupId>
   <artifactId>jnr-parent</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Parent POM for JNR projects</name>
   <description>jnr-parent encapsulates common build configurations for all jnr-* projects.</description>
@@ -26,7 +26,7 @@
   <scm>
     <url>https://github.com/jnr/parent</url>
     <developerConnection>scm:git:git@github.com:jnr/parent.git</developerConnection>
-    <tag>jnr-parent-0.0.3</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <repositories>
