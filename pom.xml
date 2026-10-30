@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <name>Parent POM for JNR projects</name>
   <description>jnr-parent encapsulates common build configurations for all jnr-* projects.</description>
-  <url>https://github.com/jnr/jnr</url>
+  <url>https://github.com/jnr/parent</url>
 
   <licenses>
     <license>
@@ -24,7 +24,7 @@
   </developers>
 
   <scm>
-    <url>https://github.com/jnr/jnr</url>
+    <url>https://github.com/jnr/parent</url>
     <developerConnection>scm:git:git@github.com:jnr/parent.git</developerConnection>
   </scm>
 
@@ -45,6 +45,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.release>8</maven.compiler.release>
     <jnr.test.toolchain>${java.specification.version}</jnr.test.toolchain>
   </properties>
 
@@ -54,9 +55,6 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.15.0</version>
-          <configuration>
-            <release>8</release>
-          </configuration>
         </plugin>
 
         <plugin>
@@ -77,9 +75,7 @@
           <version>3.5.6</version>
           <configuration>
             <!-- open up modules so we can access JDK internals during testing -->
-            <environmentVariables>
-              <JDK_JAVA_OPTIONS>--add-modules java.scripting --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</JDK_JAVA_OPTIONS>
-            </environmentVariables>
+            <argLine>--add-modules java.scripting --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</argLine>
             <jdkToolchain>
               <version>${jnr.test.toolchain}</version>
             </jdkToolchain>
@@ -151,30 +147,7 @@
 
     <plugins>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
-      <plugin>
         <artifactId>maven-release-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
@@ -184,6 +157,16 @@
       <id>release</id>
       <build>
         <plugins>
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+          </plugin>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
           </plugin>
