@@ -109,7 +109,6 @@
           <extensions>true</extensions>
           <configuration>
             <publishingServerId>central</publishingServerId>
-            <releaseProfile>release</releaseProfile>
           </configuration>
         </plugin>
 
@@ -138,6 +137,15 @@
             </gpgArguments>
           </configuration>
         </plugin>
+
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>3.3.1</version>
+          <configuration>
+            <releaseProfiles>release</releaseProfiles>
+            <goals>deploy</goals>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -156,6 +164,9 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.sonatype.central</groupId>
