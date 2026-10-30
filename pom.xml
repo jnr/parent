@@ -150,6 +150,10 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 
@@ -163,10 +167,6 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.central</groupId>
-            <artifactId>central-publishing-maven-plugin</artifactId>
           </plugin>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
