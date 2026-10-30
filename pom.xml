@@ -4,7 +4,7 @@
 
   <groupId>com.github.jnr</groupId>
   <artifactId>jnr-parent</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Parent POM for JNR projects</name>
   <description>jnr-parent encapsulates common build configurations for all jnr-* projects.</description>
@@ -25,7 +25,7 @@
 
   <scm>
     <url>https://github.com/jnr/jnr</url>
-    <connection>https://github.com/jnr/jnr.git</connection>
+    <developerConnection>scm:git:git@github.com:jnr/parent.git</developerConnection>
   </scm>
 
   <repositories>
@@ -48,35 +48,6 @@
     <jnr.test.toolchain>${java.specification.version}</jnr.test.toolchain>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.2.8</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <gpgArguments>
-                <gpgArgument>--pinentry-mode</gpgArgument>
-                <gpgArgument>loopback</gpgArgument>
-              </gpgArguments>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -87,6 +58,7 @@
             <release>8</release>
           </configuration>
         </plugin>
+
         <plugin>
           <artifactId>maven-source-plugin</artifactId>
           <version>3.4.0</version>
@@ -99,6 +71,7 @@
             </execution>
           </executions>
         </plugin>
+
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.6</version>
@@ -112,6 +85,7 @@
             </jdkToolchain>
           </configuration>
         </plugin>
+
         <plugin>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.12.0</version>
@@ -127,19 +101,42 @@
             <doclint>none</doclint>
           </configuration>
         </plugin>
+
         <plugin>
           <groupId>org.sonatype.central</groupId>
           <artifactId>central-publishing-maven-plugin</artifactId>
-          <version>0.10.0</version>
+          <version>0.12.0</version>
           <extensions>true</extensions>
           <configuration>
             <publishingServerId>central</publishingServerId>
+            <releaseProfile>release</releaseProfile>
           </configuration>
         </plugin>
+
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
           <version>6.0.2</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>3.2.8</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <gpgArguments>
+              <gpgArgument>--pinentry-mode</gpgArgument>
+              <gpgArgument>loopback</gpgArgument>
+            </gpgArguments>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -170,5 +167,18 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
