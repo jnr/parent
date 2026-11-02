@@ -75,8 +75,10 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.6</version>
           <configuration>
-            <!-- open up modules so we can access JDK internals during testing -->
-            <argLine>--add-modules java.scripting --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</argLine>
+            <!-- We pass this as JDK_JAVA_OPTIONS because that is only honor by Java 9+ -->
+            <environmentVariables>
+              <JDK_JAVA_OPTIONS>--add-modules java.scripting --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</JDK_JAVA_OPTIONS>
+            </environmentVariables>
             <jdkToolchain>
               <version>${jnr.test.toolchain}</version>
             </jdkToolchain>
